@@ -8,7 +8,7 @@ export default function LoginContainer() {
     <div className="login-box">
         <div className='login-title'>Login</div>
         <Textfield label="Email" type="text"/>
-        <Textfield label="Enter your Password" type="password"/>
+        <Textfield label="Password" type="password"/>
         <SubmitButton/> 
         </div>
   );
