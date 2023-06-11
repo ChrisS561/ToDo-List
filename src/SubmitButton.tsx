@@ -4,14 +4,16 @@
 // Create a handleClick function that console logs out I was clicked
 // Link that function to the submit button’s onClick property
 
-export default function SubmitButton() {
-	const handleClick = () => {
-		console.log('I was clicked');
-	};
+type Props = {
+	handleSubmit: () => void;
+};
 
+const SubmitButton = ({ handleSubmit }: Props) => {
 	return (
-		<button onClick={handleClick} className="submit-button">
+		<button onClick={handleSubmit} className="submit-button">
 			Login
 		</button>
 	);
-}
+};
+
+export default SubmitButton;
