@@ -15,6 +15,8 @@ function App() {
 		}
 	}, [loggedInStatus]);
 
+	
+
 	return (
 		<div>
 			{!isLoggedIn && <LoginContainer setIsLoggedIn={setIsLoggedIn} />}

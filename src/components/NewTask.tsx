@@ -1,5 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import Textfield from './Textfield';
+import { db } from '../firebase';
+import { addDoc, collection } from 'firebase/firestore';
+import TasksList from './TasksList';
 
 type Task = {
 	author: string;
@@ -11,6 +14,7 @@ type Task = {
 };
 
 export default function NewTask() {
+	// State to store the form data
 	const [newTaskForm, setNewTaskForm] = useState<Task>({
 		author: '',
 		name: '',
@@ -20,13 +24,16 @@ export default function NewTask() {
 		complete: false,
 	});
 
+	// Event handler for text input changes
 	const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setNewTaskForm({ ...newTaskForm, [event.target.name]: event.target.value });
 	};
 
+	// Event handler for form submission
 	const handleSubmit = () => {
-		console.log(newTaskForm);
-		// Handle form submission
+		const ref = collection(db,"test-chris")
+		addDoc(ref,newTaskForm)
+		
 	};
 
 	return (
@@ -79,10 +86,11 @@ export default function NewTask() {
 				</div>
 			</div>
 			<div className="flex-row">
-			
-					<button className="submit-button"onClick={handleSubmit}>Create Task</button>
-                    
-				</div>
+				<button className="submit-button" onClick={handleSubmit}>
+					Create Task
+				</button>
 			</div>
+			<TasksList/>
+		</div>
 	);
 }

@@ -3,7 +3,7 @@ import SubmitButton from './SubmitButton'; // Importing the SubmitButton compone
 import { ChangeEvent, useState } from 'react';
 
 const credentials = {
-	email: 'test@.com',
+	email: 'test@test.com',
 	password: 'password',
 };
 
@@ -12,27 +12,28 @@ type Props = {
 };
 
 export default function LoginContainer({ setIsLoggedIn }: Props) {
-	const [email, setEmail] = useState(''); // State variable for email input
-	const [password, setPassword] = useState(''); // State variable for password input
+	const [loginForm, setLoginForm] = useState({
+		email: '',
+		password: '',
+	});
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-	const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setEmail(event.target.value); // Update email state when the input value changes
-		console.log(email); // Log the email value
-	};
-
-	const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setPassword(event.target.value); // Update password state when the input value changes
-		console.log(password); // Log the password value
+	const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = event.target;
+		setLoginForm({ ...loginForm, [name]: value });
 	};
 
 	const handleSubmit = () => {
+		const { email, password } = loginForm;
 		if (email === credentials.email && password === credentials.password) {
 			setIsLoggedIn(true); // Set isLoggedIn to true if email and password match the credentials
 			console.log('You are logged in');
 			localStorage.setItem('loggedInStatus', 'loggedIn');
+			setErrorMessage('');
 		} else {
 			console.error('Login Failed'); // Log an error if login fails
 			localStorage.setItem('loggedInStatus', 'notLoggedIn');
+			setErrorMessage('Invalid email or password');
 		}
 	};
 
@@ -41,21 +42,22 @@ export default function LoginContainer({ setIsLoggedIn }: Props) {
 			{/* Outer container for the login box */}
 			<div className="login-title">Login</div> {/* Title for the login box */}
 			<Textfield
-				label="Email"
+				label="email"
 				inputType="text"
-				handleChange={handleEmailChange}
-				name='Email'
+				handleChange={handleLoginChange}
+				name="email"
 			/>{' '}
 			{/* Textfield component for the email input */}
 			<Textfield
-				label="Password"
+				label="password"
 				inputType="password"
-				handleChange={handlePasswordChange}
-				name='Password'
+				handleChange={handleLoginChange}
+				name="password"
 			/>{' '}
 			{/* Textfield component for the password input */}
 			<SubmitButton handleSubmit={handleSubmit} />{' '}
 			{/* SubmitButton component */}
+			{errorMessage && <div> {errorMessage}</div>}
 		</div>
 	);
 }
