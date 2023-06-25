@@ -22,7 +22,7 @@ export default function TasksList() {
 		});
 	};
 
-	// Trigger the getTask function when the component mounts
+	
 	useEffect(() => {
 		getTask();
 	}, []);

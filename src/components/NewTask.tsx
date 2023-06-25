@@ -23,22 +23,29 @@ export default function NewTask() {
 		priority: 'Medium',
 		complete: false,
 	});
+	const [complete, setComplete] = useState<string | boolean>(false);
 
 	// Event handler for text input changes
 	const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+		// Update the corresponding field in the form state
 		setNewTaskForm({ ...newTaskForm, [event.target.name]: event.target.value });
 	};
 
 	// Event handler for form submission
 	const handleSubmit = () => {
-		const ref = collection(db,"test-chris")
-		addDoc(ref,newTaskForm)
-		
+		// Reference to the 'test-chris' collection in Firebase
+		const ref = collection(db, 'test-chris');
+		// Add the new task document to the collection
+		addDoc(ref, newTaskForm);
+		setComplete(true);
+		setTimeout(() => {
+			setComplete(false);
+		},3000);
 	};
 
 	return (
 		<div className="new-task-box">
-			<h2>Create New task</h2>
+			<h2>Create New Task</h2>
 			<div className="flex-row">
 				<div className="flex-item">
 					<Textfield
@@ -90,7 +97,8 @@ export default function NewTask() {
 					Create Task
 				</button>
 			</div>
-			<TasksList/>
+			{complete && <div className="task-added">Task Added</div>}
+			<TasksList />
 		</div>
 	);
 }
