@@ -1,13 +1,11 @@
-import NavBar from "./NavBar";
-import NewTask from "./NewTask";
+import NavBar from './NavBar';
+import NewTask from './NewTask';
 
 type Props = {
 	setIsLoggedIn: (value: boolean) => void;
 };
 
 const TasksContainer = ({ setIsLoggedIn }: Props) => {
-
-
 	return (
 		<div>
 			<NavBar setIsLoggedIn={setIsLoggedIn} />

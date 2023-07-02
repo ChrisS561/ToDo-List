@@ -3,15 +3,9 @@ import Textfield from './Textfield';
 import { db } from '../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import TasksList from './TasksList';
+import { Task } from '../types';
 
-type Task = {
-	author: string;
-	name: string;
-	description: string;
-	dueDate: string;
-	priority: 'Low' | 'Medium' | 'High';
-	complete: boolean;
-};
+
 
 export default function NewTask() {
 	// State to store the form data
