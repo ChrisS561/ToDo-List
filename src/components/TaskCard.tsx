@@ -19,7 +19,9 @@ export default function TaskCard({ task }: Props) {
 	return (
 		<div className={complete ? 'task-card complete' : 'task-card'}>
 			<div className="task-status">
-				<button onClick={handleClick}>Mark Complete</button>
+				<button onClick={handleClick}>
+					{complete ? 'Mark Incomplete' : 'Mark'}
+				</button>
 			</div>
 			<div className="task-name-description">
 				<div className="task-name">{task.name}</div>
@@ -31,7 +33,7 @@ export default function TaskCard({ task }: Props) {
 			<div className="task-priority">
 				<b>Priority:</b> {task.priority}
 			</div>
-			<div className="task-dueDate">
+			<div className="task-dueDate" >
 				<b>Due:</b> {task.dueDate}
 			</div>
 		</div>

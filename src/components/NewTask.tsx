@@ -60,6 +60,7 @@ export default function NewTask() {
 			</div>
 			<div className="flex-row">
 				<div className="flex-item">
+					
 					<Textfield
 						label="Description"
 						inputType="text"
@@ -72,7 +73,7 @@ export default function NewTask() {
 				<div className="flex-item">
 					<Textfield
 						label="Due Date"
-						inputType="text"
+						inputType="date"
 						handleChange={handleTextChange}
 						name="dueDate"
 					/>
@@ -80,7 +81,7 @@ export default function NewTask() {
 				<div className="flex-item">
 					<Textfield
 						label="Priority"
-						inputType="text"
+						inputType="dropdown"
 						handleChange={handleTextChange}
 						name="priority"
 					/>
