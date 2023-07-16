@@ -1,6 +1,7 @@
 import Textfield from './Textfield'; // Importing the Textfield component from './Textfield'
 import SubmitButton from './SubmitButton'; // Importing the SubmitButton component from './SubmitButton'
 import { ChangeEvent, useState } from 'react';
+import { TextField } from '@mui/material';
 
 const credentials = {
 	email: 'test@test.com',
@@ -41,19 +42,35 @@ export default function LoginContainer({ setIsLoggedIn }: Props) {
 		<div className="login-box">
 			{/* Outer container for the login box */}
 			<div className="login-title">Login</div> {/* Title for the login box */}
-			<Textfield
+			{/* <Textfield
 				label="email"
 				inputType="text"
 				handleChange={handleLoginChange}
 				name="email"
-			/>{' '}
+			/>{' '} */}
 			{/* Textfield component for the email input */}
-			<Textfield
+			{/* <Textfield
 				label="password"
 				inputType="password"
 				handleChange={handleLoginChange}
 				name="password"
-			/>{' '}
+			/>{' '} */}
+			<TextField
+				label="Email"
+				fullWidth
+				sx={{ marginTop: 3 }}
+				value={loginForm.email}
+				onChange={handleLoginChange}
+				name="email"
+			/>
+			<TextField
+				label="Password"
+				fullWidth
+				sx={{ marginTop: 3 }}
+				value={loginForm.password}
+				onChange={handleLoginChange}
+				name="password"
+			/>
 			{/* Textfield component for the password input */}
 			<SubmitButton handleSubmit={handleSubmit} />{' '}
 			{/* SubmitButton component */}

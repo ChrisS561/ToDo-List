@@ -10,6 +10,7 @@ const useBootstrapEffect = () => {
 	//const [tasks, setTasks] = useRecoilState(tasksAtom)
     const setTasks = useSetRecoilState(tasksAtom)
 	const [resetTasks, setResetTasks] = useState(false);
+  
 
 
 	// useEffect hook to fetch tasks
@@ -32,9 +33,10 @@ const useBootstrapEffect = () => {
                     priority: row.data()?.priority ?? '',
                     complete: row.data()?.complete ?? '',
                 });
-                // Update the state with the temporary array
-                setTasks(tempArray);
+        
             });
+             // Update the state with the temporary array
+             setTasks(tempArray);
         };
 		getTask();
 	}, [resetTasks, setTasks]);
