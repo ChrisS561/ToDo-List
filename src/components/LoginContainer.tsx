@@ -2,6 +2,9 @@ import Textfield from './Textfield'; // Importing the Textfield component from '
 import SubmitButton from './SubmitButton'; // Importing the SubmitButton component from './SubmitButton'
 import { ChangeEvent, useState } from 'react';
 import { TextField } from '@mui/material';
+import { useRecoilState } from 'recoil';
+import { loginFormAtom } from '../atoms';
+import {useNavigate } from 'react-router-dom';
 
 const credentials = {
 	email: 'test@test.com',
@@ -13,12 +16,10 @@ type Props = {
 };
 
 export default function LoginContainer({ setIsLoggedIn }: Props) {
-	const [loginForm, setLoginForm] = useState({
-		email: '',
-		password: '',
-	});
+	const [loginForm, setLoginForm] = useRecoilState(loginFormAtom);
 	const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+	const navigate = useNavigate();
+	
 	const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 		setLoginForm({ ...loginForm, [name]: value });
@@ -31,6 +32,7 @@ export default function LoginContainer({ setIsLoggedIn }: Props) {
 			console.log('You are logged in');
 			localStorage.setItem('loggedInStatus', 'loggedIn');
 			setErrorMessage('');
+			navigate("/tasks")
 		} else {
 			console.error('Login Failed'); // Log an error if login fails
 			localStorage.setItem('loggedInStatus', 'notLoggedIn');
@@ -42,19 +44,6 @@ export default function LoginContainer({ setIsLoggedIn }: Props) {
 		<div className="login-box">
 			{/* Outer container for the login box */}
 			<div className="login-title">Login</div> {/* Title for the login box */}
-			{/* <Textfield
-				label="email"
-				inputType="text"
-				handleChange={handleLoginChange}
-				name="email"
-			/>{' '} */}
-			{/* Textfield component for the email input */}
-			{/* <Textfield
-				label="password"
-				inputType="password"
-				handleChange={handleLoginChange}
-				name="password"
-			/>{' '} */}
 			<TextField
 				label="Email"
 				fullWidth
@@ -69,6 +58,7 @@ export default function LoginContainer({ setIsLoggedIn }: Props) {
 				sx={{ marginTop: 3 }}
 				value={loginForm.password}
 				onChange={handleLoginChange}
+				type='password'
 				name="password"
 			/>
 			{/* Textfield component for the password input */}

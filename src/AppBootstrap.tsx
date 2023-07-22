@@ -7,10 +7,12 @@ import useBootstrapEffect from './Hooks/useBootstrapEffect';
 import ProfileContainer from './components/ProfileContainer';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
+
 function AppBootstrap() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const loggedInStatus = localStorage.getItem('loggedInStatus'); // Retrieve the loggedInStatus from local storage
 	const [loggedInPage, setLoggedInPage] = useState('Profile');
+
 	useBootstrapEffect();
 
 	useEffect(() => {
@@ -25,7 +27,7 @@ function AppBootstrap() {
 		<BrowserRouter>
 			<Routes>
 				<Route
-					path="/login"
+					path="/"
 					element={<LoginContainer setIsLoggedIn={setIsLoggedIn} />}
 				/>
 				<Route
